@@ -80,22 +80,41 @@ const createCustomer=()=>{
     }
 
     customerArr.push(cusomer);
+
     console.log(customerArr);
-    $('#customer-form').trigger('reset');
+    getAllCustomers();
 }
 
-const getAllCustomers=()=>{
-    let tBody=$('#t-body');
+
+
+const getAllCustomers = () => {
+    let tBody = $('#t-body');
     tBody.empty();
-    $.each(customerArr.function(i,item){
-        let row=$('<tr>');
-        let colName=$('<td>').text(item.name);
-        let colAddress=$('<td>').text(item.address);
-        let colSalary=$('<td>').text(item.salary);
-        let colNic=$('<td>').text(item.nic);
+    $.each(customerArr, function (i, item) {
+        let row = $('<tr>');
 
 
+        let colName = $('<td>').text(item.name);
+        let colAddress = $('<td>').text(item.address);
+        let colSalary = $('<td>').text(item.salary);
+        let colNic = $('<td>').text(item.nic);
+
+
+        let colOption = $('<td>');
+        let editButton = $('<button>').text('Edit').addClass('btn btn-primary btn-sm update').on('click', function() {
+            updateCustomer(item.nic);
+        });
+        let deleteButton = $('<button>').text('Delete').addClass('btn btn-danger btn-sm delete').on('click', function() {
+            deleteCustomer(i);
+        });
+
+
+        colOption.append(editButton).append(' ').append(deleteButton);
+
+
+        row.append(colName, colAddress, colSalary, colNic, colOption);
+        tBody.append(row);
     });
-}
+};
 
 /*customer management end*/
