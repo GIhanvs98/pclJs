@@ -82,7 +82,20 @@ const createCustomer=()=>{
     customerArr.push(cusomer);
     console.log(customerArr);
     $('#customer-form').trigger('reset');
+}
 
+const getAllCustomers=()=>{
+    let tBody=$('#t-body');
+    tBody.empty();
+    $.each(customerArr.function(i,item){
+        let row=$('<tr>');
+        let colName=$('<td>').text(item.name);
+        let colAddress=$('<td>').text(item.address);
+        let colSalary=$('<td>').text(item.salary);
+        let colNic=$('<td>').text(item.nic);
+
+
+    });
 }
 
 /*customer management end*/
