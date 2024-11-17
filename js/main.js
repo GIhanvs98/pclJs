@@ -94,6 +94,39 @@ const delteCustomer=(index)=>{
     }
 }
 
+if (customer) {
+
+    $('#name').val(customer.name);
+    $('#address').val(customer.address);
+    $('#salary').val(customer.salary);
+    $('#nic').val(customer.nic);
+
+
+
+    $('.btn-primary').off('click').on('click', function () {
+        customer.name = $('#name').val();
+        customer.address = $('#address').val();
+        customer.salary = parseInt($('#salary').val());
+        customer.nic = $('#nic').val();
+
+
+        alert('Customer updated successfully!');
+        $('#customer-form').trigger('reset');
+        $('.btn-primary').off('click').on('click', createCustomer).text('Submit');
+
+
+
+        getAllCustomers();
+        $('#update-btn').show();
+
+
+    }).text('Update');
+} else {
+    alert('Customer not found!');
+
+};
+
+
 const getAllCustomers = () => {
     let tBody = $('#t-body');
     tBody.empty();
@@ -111,7 +144,7 @@ const getAllCustomers = () => {
         let colOption = $('<td>');
         let  editButton=$('<button>').text('edit').addClass('btn btn-primary')
             .on('click',function (){
-                //envoke to the updatecus()
+                updateCustomer(i);
             });
         let  deleteButton=$('<button>').text('delete').addClass('btn btn-danger')
             .on('click',function (){
@@ -122,10 +155,6 @@ const getAllCustomers = () => {
 
             row.append(colName,colAddress,colSalary,colNic,colOption);
             tBody.append(row);
-
-
-
-
 
 
     } );
