@@ -85,6 +85,15 @@ const createCustomer=()=>{
     $('#customer-form').trigger('reset');
 }
 
+const delteCustomer=(index)=>{
+    if (confirm('Are you sure you want to delete this customer?')){
+        customerArr.splice(index,1);
+        alert('Customer Deleted successfully!!');
+
+        getAllCustomers();
+    }
+}
+
 const getAllCustomers = () => {
     let tBody = $('#t-body');
     tBody.empty();
@@ -106,13 +115,14 @@ const getAllCustomers = () => {
             });
         let  deleteButton=$('<button>').text('delete').addClass('btn btn-danger')
             .on('click',function (){
-                //envoke to the delCus()
+               delteCustomer(i);
             });
 
             colOption.append(editButton).append(' ').append(deleteButton);
 
             row.append(colName,colAddress,colSalary,colNic,colOption);
             tBody.append(row);
+
 
 
 
